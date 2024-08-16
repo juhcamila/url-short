@@ -14,6 +14,6 @@ export class UrlController {
   @Get(':hash')
   @Redirect(process.env.HOSTNAME_PATH, 302)
   async findAll(@Param('hash') hash: string) {
-    return await this.urlService.find(hash);
+    return await this.urlService.redirect(hash);
   }
 }

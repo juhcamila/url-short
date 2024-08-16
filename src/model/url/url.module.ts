@@ -12,7 +12,11 @@ import { UrlEntity } from './entities/url.entity';
   controllers: [UrlController],
   providers: [
     UrlService,
-    UrlRepository
+    UrlRepository,
+    UrlController
   ],
+  exports: [
+    UrlService
+  ]
 })
-export class UrlModule {}
+export class UrlModule { }

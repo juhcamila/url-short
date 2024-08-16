@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UrlRepository } from './url.repository';
 import { randomHashUrl } from 'src/config/utils';
+import { UrlEntity } from './entities/url.entity';
 
 @Injectable()
 export class UrlService {
@@ -14,8 +15,12 @@ export class UrlService {
     return `${process.env.HOSTNAME_PATH}${generateHash}`
   }
 
-  async find(hash: string): Promise<{ url: string }> {
-    const url = await this.urlRepository.find(hash)
+  async find(hash: string): Promise<UrlEntity> {
+    return await this.urlRepository.find(hash)
+  }
+
+  async redirect(hash: string): Promise<{ url: string }>{
+    const url = await this.find(hash)
     return { url: url?.link }
   }
 

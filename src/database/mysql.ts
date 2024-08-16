@@ -1,5 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
+import { AccessLinkEntity } from 'src/model/access-link/entities/acess-link.entity';
 import { UrlEntity } from 'src/model/url/entities/url.entity';
 
 export const getSequelizeConfig = (
@@ -13,6 +14,9 @@ export const getSequelizeConfig = (
     password: configService.get<string>('DATABASE_PASSWORD'),
     database: configService.get<string>('DATABASE_NAME'),
     synchronize: configService.get<boolean>('DATABASE_SYNCHRONIZE'),
-    models: [UrlEntity], 
+    models: [
+      UrlEntity,
+      AccessLinkEntity
+    ], 
   };
 };
