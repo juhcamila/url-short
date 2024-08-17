@@ -29,6 +29,7 @@
 ## Installation
 
 ```bash
+$ nvm use 22.6.0
 $ npm install
 ```
 
@@ -60,4 +61,4 @@ $ npm run test:cov
 
 ## Swagger
 
-acessar rota  http://localhost:3000/api#
+acessar rota  http://localhost:3000/api

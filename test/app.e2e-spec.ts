@@ -83,7 +83,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (POST /user)', async () => {
-    const username = `teddy${Math.floor(Math.random() * 1000)}`
+    const username = `teddy.process${Math.floor(Math.random() * 10000)}`
     const postResponse = await request(app.getHttpServer())
       .post('/user')
       .send({
@@ -116,7 +116,7 @@ describe('AppController (e2e)', () => {
 
   it('/ (POST /login)', async () => {
     const username = `teddy${Math.floor(Math.random() * 1000)}`
-    const responseUser = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .post('/user')
       .send({
         username: username,
