@@ -1,5 +1,5 @@
 import { BelongsTo, Column, ForeignKey, Model, Table } from "sequelize-typescript";
-import { UrlEntity } from "src/model/url/entities/url.entity";
+import { UrlEntity } from '../../url/entities/url.entity';
 
 @Table({
     tableName: 'access_links',

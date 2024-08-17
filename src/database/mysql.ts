@@ -1,7 +1,9 @@
 import { ConfigService } from '@nestjs/config';
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
-import { AccessLinkEntity } from 'src/model/access-link/entities/acess-link.entity';
-import { UrlEntity } from 'src/model/url/entities/url.entity';
+import { AccessLinkEntity } from './../model/access-link/entities/acess-link.entity';
+import { UserEntity } from './../model/auth/entities/auth.entity';
+import { UrlEntity } from './../model/url/entities/url.entity';
+import { UserLinkEntity } from './../model/url/entities/user-link.entity';
 
 export const getSequelizeConfig = (
   configService: ConfigService,
@@ -16,7 +18,9 @@ export const getSequelizeConfig = (
     synchronize: configService.get<boolean>('DATABASE_SYNCHRONIZE'),
     models: [
       UrlEntity,
-      AccessLinkEntity
+      AccessLinkEntity,
+      UserEntity,
+      UserLinkEntity
     ], 
   };
 };

@@ -3,11 +3,11 @@ import { UrlModule } from './model/url/url.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { getSequelizeConfig } from './database/mysql';
-import { UserModule } from './model/user/user.module';
 import { AuthModule } from './model/auth/auth.module';
-import { LoggerMiddleware } from './model/auth/auth.middleware';
 import { AccessLinkMiddleware } from './model/access-link/access-link.middleware ';
 import { AccessLinkModule } from './model/access-link/access-link.module';
+import { AuthMiddleware } from './model/auth/auth.middleware';
+import { AppMiddleware } from './app.middleware';
 
 @Module({
   imports: [
@@ -19,17 +19,20 @@ import { AccessLinkModule } from './model/access-link/access-link.module';
       useFactory: getSequelizeConfig,
       inject: [ConfigService],
     }),
-    UrlModule,
-    UserModule,
     AuthModule,
+    UrlModule,
     AccessLinkModule
   ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddleware)
-      .forRoutes({ path: '/l', method: RequestMethod.ALL });
+    .apply(AppMiddleware)
+    .forRoutes({ path: '*', method: RequestMethod.ALL });
+
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes({ path: '/link*', method: RequestMethod.ALL });
 
     consumer
       .apply(AccessLinkMiddleware)

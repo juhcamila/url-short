@@ -1,4 +1,6 @@
-import { Column, CreatedAt, DataType, DeletedAt, Model, Table, UpdatedAt } from "sequelize-typescript";
+import { Column, CreatedAt, DataType, DeletedAt, HasOne, Model, Table, UpdatedAt } from "sequelize-typescript";
+import { UserLinkEntity } from "./user-link.entity";
+import { AccessLinkEntity } from "./../../access-link/entities/acess-link.entity";
 
 @Table({
     tableName: 'links',
@@ -31,4 +33,10 @@ export class UrlEntity extends Model<UrlEntity> {
     allowNull: true,
   })
   deletedAt?: Date;
+
+  @HasOne(() => UserLinkEntity)
+  userLink: UserLinkEntity;
+
+  @HasOne(() => AccessLinkEntity)
+  access: AccessLinkEntity;
 }

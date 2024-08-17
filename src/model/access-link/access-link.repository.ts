@@ -12,7 +12,7 @@ export class AccessLinkRepository {
     async create(linkId: number): Promise<AccessLinkEntity> {
         return await AccessLinkEntity.create(<AccessLinkEntity>{
             link_id: linkId,
-            count: 0
+            count: 1
         })
     }
 

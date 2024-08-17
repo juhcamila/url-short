@@ -1,5 +1,6 @@
 require('dotenv').config();
 import * as crypto from 'crypto'
+import { Request } from 'express';
 
 const key = process.env.HASH_KEY_PASSWORD
 
@@ -33,8 +34,13 @@ export const decrypt = (encrypted: string, ivBase64: string, authTagBase64: stri
 
 export const randomHashUrl = () => {
     return crypto
-    .randomBytes(7)
-    .toString('base64')
-    .replace(/[^a-zA-Z]/g, '')
-    .substring(0, 6);
+        .randomBytes(7)
+        .toString('base64')
+        .replace(/[^a-zA-Z]/g, '')
+        .substring(0, 6);
+}
+
+export const extractTokenFromHeader = (request: Request): string | undefined => {
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : undefined;
 }
